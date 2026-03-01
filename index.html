@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Laam Ledger Summary</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div>
+        <h1>Laam Ledger Summary</h1>
+        <p class="sub">
+          Upload Marketplace and/or Octane CSV. Mapping appears only if needed. Output matches Laam-style Local/International summaries.
+        </p>
+      </div>
+      <div class="pill">Stage-1</div>
+    </header>
+
+    <main class="card">
+      <section class="grid">
+        <div class="field">
+          <label>Marketplace Ledger (CSV)</label>
+          <input id="fileMarketplace" type="file" accept=".csv,text/csv" />
+          <div class="hint">Optional</div>
+        </div>
+
+        <div class="field">
+          <label>Octane Ledger (CSV)</label>
+          <input id="fileOctane" type="file" accept=".csv,text/csv" />
+          <div class="hint">Optional</div>
+        </div>
+
+        <div class="field">
+          <label>Item Adjustments (CSV)</label>
+          <input id="fileItemAdj" type="file" accept=".csv,text/csv" />
+          <div class="hint">Optional (Stage-2 bridge)</div>
+        </div>
+
+        <div class="field">
+          <label>Vendor Deductions (CSV)</label>
+          <input id="fileVendorDed" type="file" accept=".csv,text/csv" />
+          <div class="hint">Optional (Stage-2 bridge)</div>
+        </div>
+
+        <div class="field">
+          <label>Mode</label>
+          <select id="mode">
+            <option value="auto" selected>Auto-detect (recommended)</option>
+            <option value="map">Map columns</option>
+          </select>
+          <div class="hint">If headers change, mapping will be requested automatically.</div>
+        </div>
+      </section>
+
+      <section class="actions">
+        <button id="btnGenerate" class="primary">Generate Summary</button>
+        <button id="btnCopy" class="ghost" disabled>Copy Summary</button>
+        <button id="btnDownloadJson" class="ghost" disabled>Download JSON</button>
+        <button id="btnReset" class="ghost">Reset</button>
+      </section>
+
+      <section id="status" class="status"></section>
+
+      <!-- Mapping panel -->
+      <section id="mappingPanel" class="mapping hidden">
+        <div class="mappingHeader">
+          <h2>Map Columns</h2>
+          <p class="sub">
+            Select which CSV columns represent required fields. Preview shows first 10 rows.
+          </p>
+        </div>
+
+        <div id="mappingForms" class="mappingForms"></div>
+
+        <div class="actions">
+          <button id="btnSaveMapping" class="primary">Save Mapping</button>
+          <button id="btnCancelMapping" class="ghost">Cancel</button>
+        </div>
+
+        <div id="previewWrap" class="previewWrap"></div>
+      </section>
+    </main>
+
+    <!-- Results -->
+    <section id="results" class="results hidden">
+      <div class="resultsHeader">
+        <h2>Summary</h2>
+        <p class="sub">Marketplace, Octane, and Consolidated Laam-style summaries (Local + International).</p>
+      </div>
+
+      <!-- Marketplace -->
+      <section id="sectionMarketplace" class="sectionCard hidden">
+        <div class="sectionHeader">
+          <h3>Marketplace</h3>
+          <p class="sub">Local & International blocks matching Laam summary layout.</p>
+        </div>
+        <div id="marketplaceMetrics" class="metricGrid"></div>
+        <div class="twoCol">
+          <div class="summaryCard">
+            <h4>Local</h4>
+            <div id="marketplaceLocal"></div>
+          </div>
+          <div class="summaryCard">
+            <h4>International</h4>
+            <div id="marketplaceIntl"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Octane -->
+      <section id="sectionOctane" class="sectionCard hidden">
+        <div class="sectionHeader">
+          <h3>Octane</h3>
+          <p class="sub">Local & International blocks matching Laam summary layout.</p>
+        </div>
+        <div id="octaneMetrics" class="metricGrid"></div>
+        <div class="twoCol">
+          <div class="summaryCard">
+            <h4>Local</h4>
+            <div id="octaneLocal"></div>
+          </div>
+          <div class="summaryCard">
+            <h4>International</h4>
+            <div id="octaneIntl"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Consolidated -->
+      <section id="sectionConsolidated" class="sectionCard">
+        <div class="sectionHeader">
+          <h3>Consolidated</h3>
+          <p class="sub">Marketplace + Octane combined into one Laam-style summary.</p>
+        </div>
+        <div id="consolidatedMetrics" class="metricGrid"></div>
+        <div class="twoCol">
+          <div class="summaryCard">
+            <h4>Local</h4>
+            <div id="consolidatedLocal"></div>
+          </div>
+          <div class="summaryCard">
+            <h4>International</h4>
+            <div id="consolidatedIntl"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Details -->
+      <section class="detailsCard">
+        <h3>Details</h3>
+        <div id="detailsTable"></div>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <small>Daybook • Laam Ledger Summary • Stage-1 Prototype</small>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
