@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "files": {
+    "marketplace": "optional",
+    "octane": "optional",
+    "item_adjustments": "optional",
+    "vendor_deductions": "optional"
+  },
+  "required_fields": [
+    "side",
+    "bucket",
+    "realized_sale",
+    "platform_fee",
+    "pra_tax",
+    "sales_tax",
+    "income_tax"
+  ],
+  "sides": ["local", "international"],
+  "buckets": ["sold", "refunded", "adjustment"]
+}
